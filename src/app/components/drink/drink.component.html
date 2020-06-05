@@ -1,0 +1,44 @@
+<a [routerLink]="['/']" class="btn btn-primary"><i class="fas fa-undo-alt"></i> Regresar</a>
+
+<hr>
+
+<div *ngIf="drink" class="container main-container animated fadeIn fast">
+
+    <h2> {{ drink.name }}</h2>
+
+    <div class="row">
+
+        <div class="col-md-5">
+            <img [src]="drink.url_image" [alt]="drink.name" class="img-thumbnail img-fluid">
+        </div>
+
+
+        <div class="col-md-7">
+            <h3>Instructions</h3>
+            <hr>
+            <p class="text-justify">
+                {{ drink.instructions }}
+            </p>
+            <p>
+                Alcoholic: <span class="badge badge-primary">{{ drink.alcoholic  }}</span>
+                <br> Category: <span class="badge badge-primary">{{ drink.category }}</span>
+                <br> Glass: <span class="badge badge-primary">{{ drink.glass }}</span>
+            </p>
+
+            <h4>Ingredients</h4>
+
+            <ul>
+                <li *ngFor="let ing of drink.arr_ingredients; let i = index">{{ ing }}</li>
+            </ul>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>

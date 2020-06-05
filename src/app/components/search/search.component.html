@@ -1,0 +1,66 @@
+<section class="row container-search p-3">
+
+    <div class="col-lg-12 mt-3">
+
+        <form autocomplete="off" [formGroup]="formSearch" (ngSubmit)="search()">
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="filter"><b>Filter</b></label>
+                    <select class="form-control-sm custom-select" formControlName="filter" id="filter">
+                        <option value="{{ filter.id }}" *ngFor="let filter of filterTypes">{{ filter.name }}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="search"><b>Search</b></label>
+                    <input type="text" *ngIf="!swFilter" formControlName="search" [class.is-invalid]="campoNoValido('search')" class="form-control" id="search">
+                    <small *ngIf="campoNoValido('search')" class="form-text text-danger">Debes ingresar algo que buscar</small>
+                    <select *ngIf="swFilter" formControlName="select_search" [class.is-invalid]="campoNoValido('select_search')" class="form-control-sm custom-select" id="select_search">
+                        <option *ngFor="let data of dataFilters" [selected]="data.selected == true" [value]="data.id">{{ data.name }}</option>
+                    </select>
+                    <small *ngIf="campoNoValido('select_search')" class="form-text text-danger">Debes seleccionar un filtro</small>
+                </div>
+
+
+            </div>
+
+            <span>
+                <b>{{ contador }}</b> registros encontrados
+            </span>
+
+            <button id="btnSearch" class="btn btn-primary float-right" [disabled]="disabled_button" type="submit"> <i class="fas fa-search"></i> Search</button>
+        </form>
+
+    </div>
+
+</section>
+
+
+<section class="mt-3">
+
+    <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+        <h4 class="mb-0">Busqueda</h4>
+    </div>
+
+    <hr>
+
+    <div *ngIf="drinks.length == 0" class="alert alert-warning" role="alert">
+        No se encontro ninguna información
+    </div>
+
+    <div *ngIf="drinks.length>0" class="row row-cols-2 row-cols-md-3">
+
+        <div *ngFor="let drink of drinks" class="example-item" class="col mb-4 animate backInLeft">
+            <div class="card">
+                <img [src]="drink.url_image" class="card-img-top" [alt]="drink.name">
+                <div class="card-body">
+                    <h6 class="card-title"><a [routerLink]="['/drink/', drink.id ]">{{ drink.name }}</a> </h6>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</section>
